@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>헤더의 색상보기</title>
+    <title>헤더의 색상 바꾸기</title>
     <style>
       * {
         margin: 0;
@@ -22,18 +22,19 @@
         width: 100%;
         height: 50px;
         background-color: rgba(255, 255, 255, 0.7);
+        transition: all 0.5s;
       }
       header .logo_top {
         width: 90px;
         padding: 10px 0 0 10px;
         font-size: 1.2rem;
         color: #fff;
-        background-color: blueviolet;
+        text-align: center;
       }
       header .logo_top small {
         display: block;
         font-size: 0.5rem;
-        color: #aaa;
+        color: #4f4e4e;
       }
       .img_wrap {
         width: 100%;
@@ -58,7 +59,7 @@
       </div>
     </header>
     <section class="img_wrap">
-      <img src="images/frame1.png" alt="사진" />
+      <img src="images/Frame 1.png" alt="사진" />
     </section>
     <section class="page-start">
       <div class="inner">
@@ -113,15 +114,16 @@
       </div>
     </section>
     <script>
-        const header = document.querySelector("header");
-        const page = document.querySelector(".page-start");
-        // console.log(page.offsetTop);
-        // 헤더의 색이 바뀌는 함수
-        function headerBg(){
-            const scrolled = window.pageYOffset >= page.offsetTop;
-            header.style.backgroundColor = scrolled ? "red" : "rgba(255, 255, 255, 0.7);"
-        }
-        window.addEventListener("scroll" , headerBg);
+      const header = document.querySelector("header");
+      const page = document.querySelector(".page-start");
+      //   console.log(page.offsetTop);
+      //   console.log(window.pageYOffset);
+      //   헤더의 색이 바뀌는 함수
+      function headerBg() {
+        const scrolled = window.pageYOffset >= page.offsetTop;
+        header.style.backgroundColor = scrolled ? "red" : " rgba(255, 255, 255, 0.7)";
+      }
+      window.addEventListener("scroll", headerBg);
     </script>
   </body>
 </html>
