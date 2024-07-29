@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      body {
+        font-family: "KBO-Dia-Gothic_light", sans-serif;
+        font-size: 16px;
+        /* padding: 25px; */
+        background-color: #ffff;
+        color: #333;
+        text-align: center;
+      }
+
+      a {
+        text-decoration: none;
+      }
+      .tab-nav-wrapper {
+        width: 600px;
+        margin: 50px auto;
+        overflow: hidden;
+      }
+      .tab-nav {
+        display: flex;
+        gap: 5px;
+        padding: 0;
+      }
+      .tab-nav li {
+        flex: none;
+      }
+      .tab-nav li a {
+        display: block;
+        padding: 11px 14px;
+        border-radius: 50px;
+        /* border: 1.9px solid #134aa9; */
+        color: #333333;
+        background: rgb(249 249 249);
+        text-decoration: none;
+      }
+      .tab-nav a:hover,
+      .tab-nav a.active {
+        background-color: #134aa9;
+        color: #fff;
+        transition: all 0.2s;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js"></script>
+  </head>
+  <body>
+    <div class="section2">
+      <h1 class="section-tite">프로그램</h1>
+      <!-- 카테고리 버튼-->
+      <div class="tab-nav-wrapper">
+        <ul class="tab-nav">
+          <li class="activetop"><a href="#work01">전체</a></li>
+          <li><a href="#work02">생활편의</a></li>
+          <li><a href="#work03">문화행사</a></li>
+          <li><a href="#work04">재해재난</a></li>
+          <li><a href="#work05">공익인권</a></li>
+          <li><a href="#work06">교육</a></li>
+          <li><a href="#work07">상담</a></li>
+          <li><a href="#work08">환경</a></li>
+          <li><a href="#work09">기타</a></li>
+          <li><a href="#work09"></a></li>
+          <li><a href="#work09"></a></li>
+         
+        </ul>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        const on = $(".tab-nav").find(".activetop").index();
+        // console.log(on);
+        let options = {
+          horizontal: 1,
+          itemNav: "centered", //basic , centered,
+          speed: 300,
+          smart: 1,
+          activateOn: "click",
+          mouseDragging: 1,
+          touchDragging: 1,
+          activateMiddle: 1,
+          releaseSwing: 1,
+          activeClass: "activetop",
+          startAt: on,
+          // itemSelector:1
+        };
+        let frame = new Sly(".tab-nav-wrapper", options).init();
+
+        // 탭클릭시 이벤트 핸들러 추가
+        $(".tab-nav li a").on("click", function (e) {
+          e.preventDefault();
+          $(".tab-nav li a").removeClass("active");
+          $(this).addClass("active");
+        });
+        // 초기 탭클릭 활성화
+        $(".tab-nav li a").eq(0).trigger("click");
+      });
+    </script>
+  </body>
+</html>

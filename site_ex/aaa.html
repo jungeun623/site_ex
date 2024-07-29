@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sly example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js"></script>
+    <style>
+        .frame {
+            height: 250px;
+            line-height: 250px;
+            overflow: hidden;
+        }
+        .frame ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-size: 50px;
+        }
+        .frame ul li {
+            float: left;
+            width: 227px;
+            height: 100%;
+            margin: 0 1px 0 0;
+            padding: 0;
+            background: #333;
+            color: #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .topmenu ul li ul li ul li, .activetop>a {color: red; font-weight: 600;}
+.topmenu ul li ul li ul li, .activetop>a:after {content: ""; display: block; width:100%; border-bottom: 2px solid red; margin: 15px 0px 0px 0px;}
+    </style>
+</head>
+<body>
+<div class="topmenu">
+ <div class="frame">
+    <ul class="slidee">
+        <li>메뉴1</li>
+        <li>메뉴2</li>
+        <li>메뉴3</li>
+        <li>메뉴4</li>
+        <li>메뉴5</li>
+        <li class="activetop"><a href="https://codepen.io/lee85114/pen/gOaqWZv">메뉴6</a></li>
+        <li>메뉴7</li>
+        <li>메뉴8</li>
+        <li>메뉴9</li>
+        <li>메뉴10</li>
+        <li>메뉴11</li>
+        <li>메뉴12</li>
+    </ul>
+ </div>
+</div>
+<script>
+   var on = $('.slidee').find('.activetop').index();
+    console.log(on);
+    var options = {
+       horizontal: 1,
+       itemNav: 'centered', //basic , centered,
+       speed: 300,
+       smart: 1,
+       activateOn: 'click',
+       mouseDragging: 1,
+       touchDragging: 1,
+       activateMiddle: 1,
+       releaseSwing: 1,
+       activeClass:   'activetop',
+       startAt: on
+       // itemSelector:1
+    };
+    var frame = new Sly('.frame', options).init();
+</script>
+</body>
+</html>
