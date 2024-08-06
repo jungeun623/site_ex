@@ -23,10 +23,10 @@ a {
   line-height: 70px;
 }
 .header .inner {
-  display: flex;
   width: 960px;
-  margin: auto;
+  display: flex;
   justify-content: space-between;
+  margin: auto;
 }
 .header .inner h1 {
   width: 100px;
@@ -37,6 +37,7 @@ a {
   width: 560px;
   display: flex;
   text-align: center;
+
   border-left: 1px solid rgb(220, 220, 220);
 }
 .tab-nav li {
@@ -50,20 +51,19 @@ a {
 }
 .tab-nav li a:hover,
 .tab-nav li a.active {
-  background-color: rgb(184, 110, 13);
+  background-color: #26d1d1;
   color: #fff;
 }
-.tab-nav li a.active::after{
-    content: "";
-    background: url("../images/sprites.png") no-repeat 0 0;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    width: 37px;
-    height: 19px;
-    z-index: 99;
+.tab-nav li a.active::after {
+  content: "";
+  background: url("../images/sprites.png") no-repeat 0 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 37px;
+  height: 19px;
+  z-index: 99;
 }
 .section {
   width: 1200px;
@@ -92,4 +92,5 @@ a {
   padding: 5px;
   border: 2px solid #eee;
   border-radius: 10px;
+  margin-top: 5px;
 }
