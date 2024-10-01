@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>더보기 기능</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 80%;
+        gap: 2%;
+        background-color: aquamarine;
+        margin: 0 auto;
+      }
+      .product {
+        /* width: calc(100% / 4); */
+        flex-basis: calc(100% / 4 - 1.5%);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      .product img {
+        width: 100%;
+        height: auto;
+      }
+      .product h3 {
+        font-size: 16px;
+        margin-top: 5px;
+      }
+
+      .product p {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+      #load-more {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: coral;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+        transition: all 0.3s;
+        font-weight: bold;
+      }
+      #load-more:hover {
+        background-color: rgb(249, 87, 28);
+      }
+      /* 반응형 */
+      @media screen and (max-width: 768px) {
+        /* 3개 */
+        .product {
+          flex-basis: calc(100% / 3 - 1.5%);
+        }
+      }
+      @media screen and (max-width: 580px) {
+        /* 2개 */
+        .product {
+          flex-basis: calc(100% / 2 - 1.5%);
+        }
+      }
+      @media screen and (max-width: 480px) {
+        /* 1개 */
+        .product {
+          flex-basis: calc(100% / 1 - 1.5%);
+        }
+      }
+      @media screen and (max-width: 320px) {
+        #product-container {
+          width: 90%;
+        }
+        /* 1개 */
+        .product {
+          flex-basis: calc(100% / 1 - 1.5%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="product-container">
+      <!-- js출력 -->
+      <!-- <div class="product">
+        <img src="images/tree-1.jpg" alt="상품 1" />
+        <h3>상품 1</h3>
+        <p>$10.99</p>
+        <p>상품 설명 1</p>
+      </div> -->
+    </div>
+    <button id="load-more">더보기</button>
+    <script>
+      // 상품 정보 배열
+      const products = [
+        { image: "images/tree-1.jpg", title: "상품 1", price: "$10.99", description: "상품 설명 1" },
+        { image: "images/tree-2.jpg", title: "상품 2", price: "$19.99", description: "상품 설명 2" },
+        { image: "images/tree-3.jpg", title: "상품 3", price: "$14.99", description: "상품 설명 3" },
+        { image: "images/tree-4.jpg", title: "상품 4", price: "$24.99", description: "상품 설명 4" },
+        { image: "images/tree-2.jpg", title: "상품 5", price: "$10.99", description: "상품 설명 5" },
+        { image: "images/tree-1.jpg", title: "상품 6", price: "$19.99", description: "상품 설명 6" },
+        { image: "images/tree-4.jpg", title: "상품 7", price: "$14.99", description: "상품 설명 7" },
+        { image: "images/tree-2.jpg", title: "상품 8", price: "$10.99", description: "상품 설명 8" },
+        { image: "images/tree-4.jpg", title: "상품 9", price: "$19.99", description: "상품 설명 9" },
+        { image: "images/tree-3.jpg", title: "상품 10", price: "$14.99", description: "상품 설명 10" },
+        { image: "images/tree-4.jpg", title: "상품 9", price: "$19.99", description: "상품 설명 9" },
+      ];
+      const loadMore = document.getElementById("load-more");
+
+     // 더보기 버튼 클릭 시 추가 상품 표시
+     document.getElementById("load-more").addEventListener("click", function () {
+          // 현재 표시된 상품의 수
+          var currentProductCount = document.getElementsByClassName("product").length;
+          // console.log(currentProductCount);
+
+          // 추가 상품을 4개씩 보여줌
+          var additionalProducts = products.slice(currentProductCount, currentProductCount + 4);
+
+          // 각 상품의 카트 영역 생성 및 추가
+          additionalProducts.forEach(function (product) {
+            var productContainer = document.getElementById("product-container");
+
+            var productDiv = document.createElement("div");
+            productDiv.classList.add("product");
+
+            var productImage = document.createElement("img");
+            productImage.src = product.image;
+            productImage.alt = product.title;
+
+            var productTitle = document.createElement("h3");
+            productTitle.textContent = product.title;
+
+            var productPrice = document.createElement("p");
+            productPrice.textContent = product.price;
+
+            var productDescription = document.createElement("p");
+            productDescription.textContent = product.description;
+
+            productDiv.appendChild(productImage);
+            productDiv.appendChild(productTitle);
+            productDiv.appendChild(productPrice);
+            productDiv.appendChild(productDescription);
+
+            productContainer.appendChild(productDiv);
+          });
+        });
+      loadMore.click()
+    </script>
+  </body>
+</html>

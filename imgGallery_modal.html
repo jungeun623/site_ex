@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이미지 갤러리 _ modal</title>
+    <style>
+      .content {
+        width: 50%;
+        display: flex;
+        margin: 100px auto;
+      }
+      .content img {
+        width: calc(100% / 5);
+      }
+      .modal-wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-wrap img {
+        max-width: 60%;
+        max-height: 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <img src="images/imgGallery/pic1.jpg" alt="이미지" />
+      <img src="images/imgGallery/pic2.jpg" alt="이미지" />
+      <img src="images/imgGallery/pic3.jpg" alt="이미지" />
+      <img src="images/imgGallery/pic4.jpg" alt="이미지" />
+      <img src="images/imgGallery/pic5.jpg" alt="이미지" />
+    </div>
+    <div class="modal-wrap">
+      <!-- js출력 -->
+    </div>
+    <script>
+      const images = document.querySelectorAll(".content img");
+      const modalWrap = document.querySelector(".modal-wrap");
+      // console.log(images);
+      images.forEach(function (img) {
+        // console.log(img);
+        img.addEventListener("click", () => {
+          // console.log(img);
+
+          // alert("확인")
+          const newImg = document.createElement("img");
+          // console.log(newImg);
+          newImg.src = img.src;
+          newImg.alt = img.alt;
+          // console.log(newImg);
+          // 기존이미지 지우기
+          modalWrap.innerHTML = ""
+
+          modalWrap.appendChild(newImg);
+          // console.log(modalWrap);
+          modalWrap.style.display = "flex";
+        });
+      });
+      
+      // modalWrap바탕테 클릭해서 modalWrap이 닫는다.
+      modalWrap.addEventListener("click", () => {
+        modalWrap.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

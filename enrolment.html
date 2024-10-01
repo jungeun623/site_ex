@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수강신청</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      #container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      form fieldset {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      legend {
+        font-weight: bold;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label.reg {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      .form-group p {
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      label input[type="radio"],
+      label input[type="checkbox"] {
+        margin-right: 5px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      #confirmation {
+        display: none;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      #confirmation h2 {
+        margin-top: 0;
+      }
+
+      #confirmation ul {
+        list-style: none;
+        padding-left: 20px;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>수강신청</h1>
+      <form name="testForm" id="testForm">
+        <fieldset>
+          <legend>신청인</legend>
+          <ul>
+            <li>
+              <label for="userName" class="reg">이름</label>
+              <input type="text" id="userName" name="userName" maxlength="20" />
+            </li>
+            <li>
+              <label for="class" class="reg">학과</label>
+              <select name="major" id="major">
+                <option>---- 학과 선택 ----</option>
+                <option value="archi">건축공학과</option>
+                <option value="mechanic">기계공학과</option>
+                <option value="indust">산업공학과</option>
+                <option value="elec">전기전자공학과</option>
+                <option value="computer">컴퓨터공학과</option>
+                <option value="chemical">화학공학과</option>
+              </select>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>신청과목</legend>
+          <p>이달에 신청할 과목을 선택하세요</p>
+          <label><input type="radio" name="subject" value="speaking" />회화</label>
+          <label><input type="radio" name="subject" value="grammar" />문법</label>
+          <label><input type="radio" name="subject" value="writing" />작문</label>
+        </fieldset>
+        <fieldset>
+          <legend>메일링</legend>
+          <p>메일로 받고 싶은 뉴스 주제를 선택해 주세요</p>
+          <label><input type="checkbox" name="mailing1" value="news" /> 해외 단신</label>
+          <label><input type="checkbox" name="mailing2" value="dialog" />5분 회화</label>
+          <label><input type="checkbox" name="mailing3" value="pops" />모닝팝스</label>
+        </fieldset>
+        <button type="button" id="showConfirmation">제출</button>
+        <button type="button" onclick="cancelForm()">취소</button>
+      </form>
+      <div id="confirmation">
+        <!-- js출력 -->
+      </div>
+    </div>
+    <script>
+      const showConfirmation = document.getElementById("showConfirmation");
+      showConfirmation.addEventListener("click", function () {
+        const form = document.getElementById("testForm");
+        // 메세지 확인하는 변수
+        const confirmation = document.getElementById("confirmation");
+        // 입력된 폼 데이터의 값
+        const userName = form.userName.value.trim();
+        // console.log(userName.length);
+        const major = form.major.value;
+        // console.log(major);
+        const subject = form.subject.value;
+        // console.log(subject);
+        const mailing1 = form.mailing1.checked;
+        const mailing2 = form.mailing2.checked;
+        const mailing3 = form.mailing3.checked;
+        // console.log(mailing1);
+        // 유효성 검사
+        // 에러 메시지 초기화
+        let errorMessage = "";
+        // console.log(errorMessage);
+        // 유호성 검사
+        if (userName === "") {
+          errorMessage += `<p>이름을 입력해 주세요.</p>`;
+        }
+        // console.log(errorMessage);
+        if (major === "" || major === "---- 학과 선택 ----") {
+          errorMessage += `<p>학과를 선택해 주세요.</p>`;
+        }
+
+        if (subject === "") {
+          errorMessage += `<p>신청할 과목을 선택해 주세요.</p>`;
+        }
+
+        if (!mailing1 && !mailing2 && !mailing3) {
+          errorMessage += "<p>메일로 받을 뉴스를 하나 이상 선택해 주세요.</p>";
+        }
+        // console.log(errorMessage);
+        // 에러메시지가 있는 경우
+        if (errorMessage) {
+          confirmation.innerHTML = `<div class="error">${errorMessage}</div> `;
+          confirmation.style.display = "block";
+          return; //품 제출 중단
+        }
+        // 확인 메시지 생성
+        const confirmationMessage = `
+         <h2>수강신천 내용 확인</h2>
+        <p><strong>이름:</strong> ${userName}</p>
+        <p><strong>학과:</strong> ${major}</p>
+        <p><strong>신청 과목:</strong> ${subject}</p>
+        <p><strong>메일링:</strong></p>
+        <ul>
+          <li>${mailing1 ? "해외 단신" : ""} </li>
+          <li>${mailing2 ? "5분 회화" : ""} </li>
+          <li>${mailing3 ? "모닝팝스" : ""} </li>
+        </ul>
+        <button type="button" id="confirmBtn">확인</button>
+        <button type="button" id="resetBtn">다시 신청</button>
+        `;
+        // 확인 메시지 표시 및 폼 숨기기
+        confirmation.innerHTML = confirmationMessage;
+        form.style.display = "none";
+        confirmation.style.display = "block";
+        // 확인메시지에 있는 확인버튼
+        document.getElementById("confirmBtn").addEventListener("click", function () {
+          alert("확인 완료!! 메인페이지로 이동하겠습니다.");
+          window.location.href = "order.html";
+        });
+        document.getElementById("resetBtn").addEventListener("click", function () {
+          document.getElementById("testForm").reset();
+          form.style.display = "block";
+          confirmation.style.display = "none";
+        });
+      });
+      // 취소 버튼 클릭시
+      function cancelForm() {
+        // alert("취소")
+        document.getElementById("testForm").reset();
+        document.getElementById("confirmation").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

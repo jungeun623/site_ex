@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고양이 정보 받아오기</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      #catList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 1100px;
+        background-color: antiquewhite;
+        margin: 0 auto;
+      }
+
+      .cat {
+        width: 200px;
+        margin-bottom: 20px;
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>고양이 목록</h1>
+    <div id="catList">
+      <!-- js출력 -->
+    </div>
+    <script>
+      const catListContainer = document.getElementById("catList");
+      fetch("https://api.thecatapi.com/v1/images/search?limit=10")
+        .then((response) => response.json())
+        .then((catImages) => {
+          //   console.log(catImages);
+          catImages.forEach((catImage) => {
+            console.log(catImage);
+            catListContainer.innerHTML += `
+             <div class="cat-card">
+        <a href="catinfo.html?id=${catImage.id}">
+          <img src="${catImage.url}" alt="고양이 사진" class="cat" />
+        </a>
+      </div>
+            `;
+          });
+        })
+        .catch((error) => console.error("고양이 목록을 불러오는 중 오류 발생:", error));
+    </script>
+  </body>
+</html>

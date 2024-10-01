@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이미지 갤러리</title>
+    <style>
+      body {
+        width: 640px;
+        margin: auto;
+      }
+      .full-img {
+        position: relative;
+        display: block;
+        width: 640px;
+        height: 480px;
+        background-color: blanchedalmond;
+      }
+      .full-img button {
+        border: 0;
+        background: rgba(150, 150, 150, 0.6);
+        text-shadow: 1px 1px 1px white;
+        border: 1px solid #999;
+        position: absolute;
+        cursor: pointer;
+        top: 2px;
+        left: 2px;
+      }
+      .thumb-bar {
+        display: flex;
+      }
+      .thumb-bar img {
+        width: calc(100% / 5);
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 640px;
+        height: 480px;
+        background-color: rgba(0, 0, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="full-img">
+      <img src="images/imgGallery/pic1.jpg" alt="이미지" class="display-img" />
+      <div class="overlay">
+        <!-- js출력 -->
+      </div>
+      <button class="dark">Darken</button>
+    </div>
+    <!-- thumb img -->
+    <div class="thumb-bar">
+      <!-- js출력 -->
+    </div>
+    <script>
+      const displayImg = document.querySelector(".display-img");
+      const thumbBar = document.querySelector(".thumb-bar");
+      const btn = document.querySelector(".dark");
+      const overlay = document.querySelector(".overlay");
+      const images = [`pic1.jpg`, `pic2.jpg`, `pic3.jpg`, `pic4.jpg`, `pic5.jpg`];
+      const alts = {
+        "pic1.jpg": "Closeup of a human eye",
+        "pic2.jpg": "Rock that looks like a wave",
+        "pic3.jpg": "Purple and white pansies",
+        "pic4.jpg": "Section of wall from a pharoah's tomb",
+        "pic5.jpg": "Large moth on a leaf",
+      };
+      //   images.forEach(function(){})
+      //   이미지 변경
+      images.forEach((image) => {
+        console.log(image);
+        const newImage = document.createElement("img");
+        newImage.setAttribute("src", `images/imgGallery/${image}`);
+        newImage.setAttribute("alt", `${alts[image]}`);
+        // console.log(newImage);
+        thumbBar.appendChild(newImage);
+        newImage.addEventListener("click", function (e) {
+          displayImg.src = e.target.src;
+          displayImg.alt = e.target.alt;
+        });
+      });
+      //   다크모드 변경
+      btn.addEventListener("click", function () {
+        const btnClass = btn.getAttribute("class");
+        if (btnClass === "dark") {
+          btn.setAttribute("class", "light");
+          // console.log(btn);
+          btn.textContent = "lighten";
+          overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+        }else{
+            btn.setAttribute("class", "dark");
+          // console.log(btn);
+          btn.textContent = "darken";
+          overlay.style.backgroundColor = "rgba(0,0,0,0)";  
+        }
+      });
+    </script>
+  </body>
+</html>

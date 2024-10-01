@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>제품 프로모션 사이트</title>
+    <style>
+      .highlight {
+        background-color: yellow;
+      }
+      .expensive {
+        font-weight: bold;
+        color: red;
+      }
+      .strikethrough {
+        text-decoration: line-through;
+        color: red;
+      }
+      .discounted-price {
+        font-weight: bold;
+        color: green;
+        margin-left: 10px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>제품 선택</h1>
+    <button id="discount-btn">10% 할인 적용</button>
+    <button id="filter-btn">$30이상 제품만 보기</button>
+    <ul id="product-list">
+      <li data-price="29.99" data-category="electronics">스마트폰 - <span class="price">$29.99</span></li>
+      <li data-price="15.99" data-category="books">요리책 - <span class="price">$15.99</span></li>
+      <li data-price="59.99" data-category="electronics">노트북 - <span class="price">$59.99</span></li>
+      <li data-price="12.99" data-category="books">노트 - <span class="price">$12.99</span></li>
+      <li data-price="99.99" data-category="home">청소기 - <span class="price">$99.99</span></li>
+    </ul>
+    <h2>선택된 제품</h2>
+    <ul id="selected-products">
+      <!-- js출력 -->
+    </ul>
+    <script>
+      $(document).ready(function () {
+        // 할인 버튼클릭 이벤트
+        $("#discount-btn").on("click", function () {
+          let isDiscoutApplied = $(this).data("discount-applied");
+          console.log(isDiscoutApplied); //undefined
+
+          $("#product-list li").each(function (index, element) {
+            // console.log(index ,item);
+            let priceEle = $(element).find(".price");
+            let originalPrice = parseFloat($(element).data("price"));
+            if (isDiscoutApplied) {
+              // 할인 적용 상태인 경우, 원래 가격으로 복구
+              if (priceEle.hasClass("strikethrough")) {
+                priceEle.removeClass("strikethrough").text(`$ ${$(element).data("original-price")}`);
+                $(element).find(".discounted-price").remove();
+                $(element).data("price", $(element).data("original-price"));
+              }
+            } else {
+              // 할인 미적용 상태인 경우, 할인 적용
+              if (!priceEle.hasClass("strikethrough")) {
+                // originalPrice * 0.9 원래금액에 10% 할인
+                // toFixed(2) 소수점 두째짜리까지 출력
+                let discountedPrice = (originalPrice * 0.9).toFixed(2);
+                // console.log(discountedPrice);
+                $(element).data("original-price", originalPrice); //원래 가격 저장
+                $(element).data("price", discountedPrice); // 할인 가격으로 업데이트됨
+                priceEle.addClass("strikethrough").text(`$${originalPrice}`);
+                $(element).append(`<span class="discounted-price"> $${discountedPrice}</span>`);
+              }
+            }
+          });
+          // 할인 적용 상태 토글
+          $(this).data("discount-applied", !isDiscoutApplied);
+        });
+        // 필터 버튼 이벤트
+        $("#filter-btn").on("click", function () {
+          let isfiltered = $(this).data("filtered");
+          // console.log(isfiltered); //undefined
+          if (isfiltered) {
+            $("#product-list li").removeClass("highlight").show();
+            // 필터가 적용된 상태인 경우, 필터 해제
+          } else {
+            // 필더 미적용 상태인 경우, 가격에 따라 필터링
+            $("#product-list li")
+              .filter(function (index, element) {
+                let price = parseFloat($(element).data("price"));
+                // console.log($(element).data("price"));
+                // parseFloat() 문자를 숫자로 변환
+                // console.log(price);
+                return price >= 30;
+              })
+              .addClass("highlight")
+              .show();
+            $("#product-list li")
+              .filter(function (index, element) {
+                let price = parseFloat($(element).data("price"));
+                // console.log($(element).data("price"));
+                // parseFloat() 문자를 숫자로 변환
+                // console.log(price);
+                return price < 30;
+              })
+              .hide();
+          }
+          // 필터 상태 토글
+          $(this).data("filtered", !isfiltered);
+        });
+        // map() 특정 범주의 제품 목록 가져오기
+        let selectedCategory = "electronics";
+        let selectedProoducts = $("#product-list li")
+          .filter(function (index, element) {
+            // console.log(element);
+            return $(element).data("category") === selectedCategory;
+          })
+          .map(function (index, element) {
+            return $(element).text();
+          })
+          .get();
+        // console.log(selectedProoducts);
+        $("#selected-products").html(
+          selectedProoducts.map(function (product) {
+            // console.log(product);
+            return ` <li> ${product} </li> `;
+          })
+          // selectedProoducts.map(function (product) {
+          //   // console.log(product);
+          //   return `${product} `;
+          // }).join(" , ")
+        );
+        console.log(selectedProoducts);
+        
+      });
+    </script>
+  </body>
+</html>

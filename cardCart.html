@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상품 카드</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: calc(33% - 20px); /* Three cards per row with spacing */
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+    .card-content p {
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #cart {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+    #cart h2 {
+      margin-bottom: 10px;
+    }
+    #cart-item {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    #cart-item li {
+      margin-bottom: 5px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+    }
+    #total {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="product-container">
+    <!-- 카드가 여기에 동적으로 생성됩니다. -->
+  </div>
+  <div id="cart" class="container">
+    <h2>장바구니</h2>
+    <ul id="cart-item"></ul>
+    <p id="total">총 가격: $0</p>
+  </div>
+  <script>
+    // 더미 데이터
+    const products = [
+      { name: '아이폰 12 Pro', price: 1199, image: 'https://via.placeholder.com/300x200?text=아이폰+12+Pro' },
+      { name: '갤럭시 S21 Ultra', price: 2199, image: 'https://via.placeholder.com/300x200?text=갤럭시+S21+Ultra' },
+      { name: '맥북 프로 16"', price: 2399, image: 'https://via.placeholder.com/300x200?text=맥북+프로+16"' },
+      { name: '삼성 모니터', price: 499, image: 'https://via.placeholder.com/300x200?text=삼성+모니터' },
+      { name: '에어팟 프로', price: 249, image: 'https://via.placeholder.com/300x200?text=에어팟+프로' }
+    ];
+
+    // 장바구니 배열
+    let cart = [];
+
+    // 장바구니에 담는 함수
+    function addToCart(productName, price) {
+      cart.push({ name: productName, price: price });
+      displayCart();
+    }
+
+    // 장바구니에 담길 내용을 담을 노드 만들기
+    function displayCart() {
+      const cartItems = document.getElementById("cart-item");
+      let total = 0;
+      cartItems.innerHTML = ``;
+      cart.forEach(function (item) {
+        let itemHTML = `
+          <li>
+            <h3>${item.name}</h3>
+            <p>가격: $ ${item.price.toLocaleString()}</p>
+          </li>
+        `;
+        cartItems.innerHTML += itemHTML;
+        total += item.price;
+      });
+      // 총금액을 변경
+      const totalPrice = document.querySelector("#total");
+      totalPrice.textContent = `총 가격: $ ${total.toLocaleString()}`;
+    }
+
+    // 상품 카드를 생성하는 함수
+    function createProductCards() {
+      const productContainer = document.getElementById('product-container');
+      products.forEach(product => {
+        let cardHTML = `
+          <div class="card">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="card-content">
+              <h3>${product.name}</h3>
+              <p>가격: $${product.price.toLocaleString()}</p>
+              <button onclick="addToCart('${product.name}', ${product.price})">장바구니에 추가</button>
+            </div>
+          </div>
+        `;
+        productContainer.innerHTML += cardHTML;
+      });
+    }
+
+    // 페이지가 로드될 때 상품 카드를 생성합니다.
+    document.addEventListener('DOMContentLoaded', createProductCards);
+  </script>
+</body>
+</html>

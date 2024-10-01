@@ -1,0 +1,63 @@
+[
+    {
+      "img": "gallery/gallery1.jpg",
+      "title": "아이템제목1",
+      "dec": "아이템 설명1",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae at commodi vitae."
+    },
+    {
+      "img": "gallery/gallery2.png",
+      "title": "아이템제목2",
+      "dec": "아이템 설명2",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad "
+    },
+    {
+      "img": "gallery/gallery3.jpg",
+      "title": "아이템제목3",
+      "dec": "아이템 설명3",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae "
+    },
+    {
+      "img": "gallery/gallery4.jpg",
+      "title": "아이템제목4",
+      "dec": "아이템 설명4",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae at commodi vitae."
+    },
+    {
+      "img": "gallery/gallery5.jpg",
+      "title": "아이템제목5",
+      "dec": "아이템 설명5",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus "
+    },
+    {
+      "img": "gallery/gallery6.jpg",
+      "title": "아이템제목6",
+      "dec": "아이템 설명6",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae at commodi vitae."
+    },
+    {
+      "img": "gallery/gallery7.jpg",
+      "title": "아이템제목7",
+      "dec": "아이템 설명7",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae "
+    },
+    {
+      "img": "gallery/gallery8.jpg",
+      "title": "아이템제목8",
+      "dec": "아이템 설명8",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus "
+    },
+    {
+      "img": "gallery/gallery1.jpg",
+      "title": "아이템제목7",
+      "dec": "아이템 설명7",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae "
+    },
+    {
+      "img": "gallery/gallery3.jpg",
+      "title": "아이템제목7",
+      "dec": "아이템 설명7",
+      "info": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, officiis eaque quidem cupiditate ipsam perspiciatis dolor officia voluptas quisquam doloribus accusamus eos ad numquam ipsa odit recusandae "
+    }
+  ]
+  

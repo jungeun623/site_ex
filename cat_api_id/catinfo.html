@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고양이 id 정보 받아서 출력</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .cat-info {
+            padding: 20px;
+        }
+
+        .cat-image {
+            max-width:500px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>고양이id 정보출력</h1>
+    <div class="cat-info" id="catInfo">
+      <!-- js출력 -->
+    </div>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      console.log(urlParams);
+      const catId = urlParams.get("id");
+      const catInfoContainer = document.getElementById("catInfo");
+      fetch(`https://api.thecatapi.com/v1/images/${catId}`)
+        .then((response) => response.json())
+        .then((catInfo) => {
+          // console.log(catInfo);
+          const catInfoDiv = document.createElement("div");
+          catInfoDiv.innerHTML = `
+             <h2>Cat ID: ${catInfo.id}</h2>
+                    <p>Width: ${catInfo.width}</p>
+                    <p>height: ${catInfo.height}</p>
+                    <p>URL: <a href="${catInfo.url}" target="_blank">${catInfo.url}</a></p>
+                    <img class="cat-image" src="${catInfo.url}" alt="고양이 사진">
+           `;
+          catInfoContainer.appendChild(catInfoDiv);
+        })
+        .catch((error) => console.error("고양이 목록을 불러오는 중 오류 발생:", error));
+    </script>
+  </body>
+</html>

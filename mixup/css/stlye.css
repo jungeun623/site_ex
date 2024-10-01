@@ -1,0 +1,35 @@
+@charset "utf-8";
+*{
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+}
+.container,.mix-wrapper{
+    width: 80%;
+    margin: 100px auto;
+}
+.mix{
+    width: 20%;
+    margin: 20px 10px;
+    text-align: center;
+    background: #ccc;
+    padding: 5px;
+    display: inline-block;
+    color: #fff;  
+}
+.mix img{
+    width: 100%;
+}
+.blue {
+    background: blue;
+  }
+  .orange {
+    background: orange;
+  }
+  .black {
+    background: black;
+  }
+  .green {
+    background: green;
+  }
+  

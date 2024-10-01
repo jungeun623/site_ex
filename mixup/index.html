@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MisItUp</title>
+    <link rel="stylesheet" href="css/stlye.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- <script src="patrickkunka-mixitup-61dac05/demos/mixitup.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js" integrity="sha512-nKZDK+ztK6Ug+2B6DZx+QtgeyAmo9YThZob8O3xgjqhw2IVQdAITFasl/jqbyDwclMkLXFOZRiytnUrXk/PM6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="patrickkunka-mixitup-61dac05/demos/mixitup.min.js"></script> -->
+  </head>
+  <body>
+    <div class="container">
+      <button type="button" data-filter="all">All</button>
+      <button type="button" data-filter=".blue">BLUE</button>
+      <button type="button" data-filter=".orange">ORANGE</button>
+      <button type="button" data-filter=".black">BLACK</button>
+      <button type="button" data-filter=".green">GREEN</button>
+      <hr />
+      <button type="button" data-sort="order:asc">Ascending</button>
+      <button type="button" data-sort="order:descending">Descending</button>
+      <button type="button" data-sort="random">Random</button>
+      <hr />
+      <label for="filter-select">Filter</label>
+      <select name="" id="filter-select">
+        <option value="all">All</option>
+        <option value=".blue">BLUE</option>
+        <option value=".orange">ORANGE</option>
+        <option value=".black">BLACK</option>
+        <option value=".green">GREEN</option>
+      </select>
+      <label for="sort-select">Sort</label>
+      <select name="" id="sort-select">
+        <option value="order:asc">Ascending</option>
+        <option value="order:descending">Descending</option>
+        <option value="random">Random</option>
+      </select>
+    </div>
+
+    <div class="mix-wrapper">
+      <div class="mix blue" data-order="1">
+        <h5>BOX1</h5>
+        <h6>blue</h6>
+      </div>
+      <div class="mix orange" data-order="2">
+        <h5>BOX2</h5>
+        <h6>orange</h6>
+      </div>
+      <div class="mix black" data-order="3">
+        <h5>BOX3</h5>
+        <h6>black</h6>
+      </div>
+      <div class="mix orange" data-order="4">
+        <h5>BOX4</h5>
+        <h6>orange</h6>
+      </div>
+      <div class="mix green" data-order="5">
+        <h5>BOX5</h5>
+        <h6>green</h6>
+      </div>
+      <div class="mix black" data-order="6">
+        <h5>BOX6</h5>
+        <h6>black</h6>
+      </div>
+      <div class="mix orange" data-order="7">
+        <h5>BOX7</h5>
+        <h6>orange</h6>
+      </div>
+      <div class="mix orange" data-order="8">
+        <h5>BOX8</h5>
+        <h6>orange</h6>
+      </div>
+      <div class="mix blue" data-order="9">
+        <h5>BOX9</h5>
+        <h6>blue</h6>
+      </div>
+      <div class="mix black" data-order="10">
+        <h5>BOX10</h5>
+        <h6>black</h6>
+      </div>
+      <div class="mix green" data-order="11">
+        <h5>BOX11</h5>
+        <h6>green</h6>
+      </div>
+      <div class="mix green" data-order="12">
+        <div class="card-wrap">
+            <h5>BOX12</h5>
+            <h6><img src="../images/Frame 1.png" alt="" /></h6>
+        </div>
+       
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        // 버튼 클릭시 적용
+        let mixer = mixitup(".mix-wrapper", {
+          // animate설정
+          animation: {
+            duration: 250,
+            //   미세한 위치 이동
+            nudge: true,
+            //   방향 이나 순서관련 역방향으로 실행여부
+            reverseOut: false,
+            effects: "fade translateZ(-100px) rotateX(96deg) rotateY(-42deg)",
+          },
+        });
+        // select했을때 관련코드
+        $("#filter-select").change(function(){
+            let value = $(this).val()
+            // console.log(value);
+            mixer.filter(value)
+            
+        })
+        $("#sort-select").change(function(){
+            let value = $(this).val()
+            // sort() 정렬관련된 메서드
+            mixer.sort(value)
+        })
+      });
+    </script>
+  </body>
+</html>

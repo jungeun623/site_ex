@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>total 주문하기</title>
+    <style>
+      #container {
+        width: 400px;
+        margin: 0 auto;
+        background-color: antiquewhite;
+        padding: 20px;
+      }
+
+      fieldset {
+        margin-bottom: 20px;
+        border: 1px solid #b6b5b5;
+      }
+
+      #total {
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>피자 주문</h1>
+      <form>
+        <fieldset>
+          <legend>사이즈</legend>
+          <p>Large - 24,000원</p>
+        </fieldset>
+        <fieldset>
+          <legend>추가주문</legend>
+          <label for="selectAll"> <input type="checkbox" id="selectAll" />전체선택 </label>
+          <br />
+          <br />
+          <label for="pickle">
+            <input type="checkbox" id="pickle" class="checkbox" name="pickle" value="800" />
+            피클 (800원)
+          </label>
+          <label for="chilly">
+            <input type="checkbox" id="chilly" class="checkbox" name="chilly" value="300" />
+            칠리소스(300원)
+          </label>
+          <label for="deeping">
+            <input type="checkbox" id="deeping" class="checkbox" name="deeping" value="500" />
+            디핑소스(500원)
+          </label>
+          <label for="stick">
+            <input type="checkbox" id="stick" class="checkbox" name="stick" value="1500" />
+            치즈스틱(1500)
+          </label>
+          <label for="salsd">
+            <input type="checkbox" id="salsd" class="checkbox" name="salsd" value="3500" />
+            콘 샐러드(3500)
+          </label>
+        </fieldset>
+        <fieldset>
+          <div id="slelectedItem">
+            <!-- js출력 -->
+          </div>
+          <input type="text" id="total" name="total" class="price" />
+        </fieldset>
+      </form>
+    </div>
+    <script>
+      let basePrice = 24000;
+      let price = basePrice;
+      const sideMenu = document.querySelectorAll(".checkbox");
+      const total = document.querySelector("#total");
+      const slelectedItem = document.querySelector("#slelectedItem");
+      const selectAll = document.querySelector("#selectAll");
+      total.value = `합계 : ${price.toLocaleString()}원`;
+      //  개별 체크박스 클릭시 실행
+      sideMenu.forEach((checkbox) => {
+        // console.log(checkbox);
+        checkbox.onclick = function () {
+          let itemName = this.parentNode.textContent.trim();
+          //   console.log(itemName);
+          let itemPrice = parseInt(this.value);
+          // console.log(itemPrice);
+          if (this.checked) {
+            price += itemPrice;
+            // console.log(price);
+            slelectedItem.innerHTML += `<div class ="sideItem">${itemName} : ${itemPrice.toLocaleString()}원 </div>  `;
+          } else {
+            price -= itemPrice;
+            let sideItem = document.querySelectorAll(".sideItem");
+            sideItem.forEach((item) => {
+              // console.log(item);
+              if (item.textContent.includes(itemName)) {
+                item.remove();
+              }
+            });
+          }
+          total.value = `합계 : ${price.toLocaleString()}원`;
+        };
+      });
+      // 전체선택 기능
+      selectAll.onclick = function () {
+        // 선택항목 및 가격 초기화
+        // 선택항목 초기화
+        slelectedItem.innerHTML = "";
+        // 가격 초기화
+        price = basePrice;
+        // 모든 체크박스의 체크 상태를 먼저 초기화
+        sideMenu.forEach((checkbox) => {
+          // console.log(checked);
+          checkbox.checked = false; //체크 해제
+        });
+        // 전체 선택 체크박스의 체크된 경우
+        if (selectAll.checked) {
+          sideMenu.forEach((checkbox) => {
+            // console.log(checked);
+            checkbox.checked = true; //모든 체크박스를 선택
+            checkbox.dispatchEvent(new Event("click")); //클릭이벤 발생
+          });
+        }
+
+        total.value = `합계 : ${price.toLocaleString()}원`;
+      };
+    </script>
+  </body>
+</html>

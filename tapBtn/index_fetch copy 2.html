@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        list-style: none;
+      }
+      a {
+        color: #333;
+        text-decoration: none;
+      }
+      .menu {
+        width: 70%;
+        margin: auto;
+        display: flex;
+      }
+      .menu-item {
+        flex: 1;
+        cursor: pointer;
+        text-align: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+      }
+      .menu-item:hover,
+      .menu-item.active {
+        background-color: #ddd;
+      }
+      .card-container {
+        width: 60%;
+        margin: auto;
+        margin-top: 20px;
+      }
+      .card {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+      .card.active {
+        display: flex;
+      }
+      .card li {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        background-color: aliceblue;
+      }
+      .card li img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 탭버튼 -->
+    <div class="menu">
+      <!-- <div class="menu-item">메뉴 1</div>
+      <div class="menu-item">메뉴 2</div>
+      <div class="menu-item">메뉴 3</div> -->
+    </div>
+    <!-- 탭버튼 클릭시 나오는 영역 -->
+    <div class="card-container">
+      <!-- 메뉴 1 -->
+      <!-- <ul class="card">
+        <li>
+          <img src="images/work-1.jpg" alt="이미지 1" />
+          <h2>설명 : 1-1</h2>
+          <p>가격 : 5,800원</p>
+        </li>
+      
+      </ul> -->
+    </div>
+    <script>
+      //  json 파일에서 데이터 불러오기
+    // Fetch JSON data
+fetch("data.json")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Request failed");
+    }
+    return response.json();
+  })
+  .then(jsonData => {
+    const menuItems = jsonData.menu;
+    const cardData = jsonData.cards;
+    const menuContainer = document.querySelector(".menu");
+    const cardContainer = document.querySelector(".card-container");
+
+    // Create menu items
+    menuContainer.innerHTML = menuItems
+      .map((menu, index) => `
+        <div class="menu-item">${menu}</div>
+      `).join('');
+
+    // Create cards
+    cardContainer.innerHTML = cardData
+      .map((cards, index) => `
+        <ul class="card">
+          ${cards
+            .map(card => `
+              <li>
+                <img src="${card.img}" alt="Image" />
+                <h2>${card.description}</h2>
+                <p>Price: ${card.price}</p>
+              </li>
+            `).join('')}
+        </ul>
+      `).join('');
+
+    // Activate the first menu item and card by default
+    const menuItemsElements = document.querySelectorAll(".menu-item");
+    const cardsElements = document.querySelectorAll(".card");
+
+    if (menuItemsElements.length > 0) {
+      menuItemsElements[0].classList.add("active");
+    }
+    if (cardsElements.length > 0) {
+      cardsElements[0].classList.add("active");
+    }
+
+    // Handle menu item clicks
+    menuItemsElements.forEach((menuItem, index) => {
+      menuItem.addEventListener("click", () => {
+        // Remove active class from all menu items and cards
+        menuItemsElements.forEach(item => item.classList.remove("active"));
+        cardsElements.forEach(card => card.classList.remove("active"));
+
+        // Add active class to the clicked menu item and corresponding card
+        menuItem.classList.add("active");
+        cardsElements[index].classList.add("active");
+      });
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+
+    </script>
+  </body>
+</html>

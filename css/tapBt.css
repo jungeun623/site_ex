@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.workSection {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+/* header */
+.header {
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  line-height: 70px;
+}
+.header .inner {
+  width: 960px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+.header .inner h1 {
+  width: 100px;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+.tab-nav {
+  width: 560px;
+  display: flex;
+  text-align: center;
+
+  border-left: 1px solid rgb(220, 220, 220);
+}
+.tab-nav li {
+  width: calc(100% / 5);
+  border-right: 1px solid rgb(220, 220, 220);
+}
+.tab-nav li a {
+  display: block;
+  padding: 0 2em;
+  position: relative;
+}
+.tab-nav li a:hover,
+.tab-nav li a.active {
+  background-color: #26d1d1;
+  color: #fff;
+}
+.tab-nav li a.active::after {
+  content: "";
+  background: url("../images/sprites.png") no-repeat 0 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 37px;
+  height: 19px;
+  z-index: 99;
+}
+.section {
+  width: 1200px;
+  margin: auto;
+  position: relative;
+}
+.tabitem {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.tabitem img {
+  width: 100%;
+}
+.content {
+  position: absolute;
+  width: 30%;
+  top: 10%;
+  right: 2%;
+  color: #fff;
+  line-height: 1.8;
+}
+.read-mord {
+  font-size: 14px;
+  display: inline-block;
+  padding: 5px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  margin-top: 5px;
+}

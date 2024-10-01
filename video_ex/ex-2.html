@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>버튼 클릭시 비디오 출력</title>
+    <style>
+      #show-video {
+        padding: 20px;
+        background-color: bisque;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      #video-container {
+        position: relative;
+        margin: 200px auto;
+        width: 50%;
+        background-color: rgb(4, 147, 147);
+        padding: 2%;
+        
+      }
+      #video-container.active{
+        display: none;
+      }
+      #video-container video{
+        display: block;
+        width: 100%;
+      }
+      .close {
+        position: absolute;
+        right: 0px;
+        top: -30px;
+        padding: 5px;
+       background: transparent;
+       border: none;
+       font-size: 20px;
+       font-weight: bold;
+      
+        
+      }
+    </style>
+  </head>
+  <body>
+    <button id="show-video">비디오 재생</button>
+    <div class="hidden" id="video-container">
+      <video>
+        <source src="video/ex1.mp4" type="video/mp4" />
+      </video>
+      <button class="close" id="close-video">X</button>
+    </div>
+    <script>
+      const showBtn = document.getElementById("show-video");
+      const videoContainer = document.getElementById("video-container");
+      const closeBtn = document.getElementById("close-video");
+      const video = videoContainer.querySelector("video")
+    //비디오 열기
+    showBtn.addEventListener("click" ,()=>{
+        videoContainer.classList.toggle("active")
+        video.pause()
+    })
+    //   닫는 기능 함수
+    closeBtn.addEventListener("click" , ()=>{
+        videoContainer.classList.add("active")
+        video.pause()
+
+    })
+    video.addEventListener("click" , ()=>{
+        if(video.paused){
+            video.play()
+        }else{
+            video.pause()
+        }
+    })
+   
+    </script>
+  </body>
+</html>

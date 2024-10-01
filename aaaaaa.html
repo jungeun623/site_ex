@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>웹사이트 예제</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      nav {
+        background-color: #333;
+        color: white;
+        padding: 1em;
+        text-align: center;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0 1em;
+      }
+
+      header {
+        background: url('images/header-bg.jpg') no-repeat center center/cover;
+        height: 300px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+      }
+
+      .content {
+        padding: 2em;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .gallery img {
+        width: 30%;
+        cursor: pointer;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <a href="#">홈</a>
+      <a href="#">갤러리</a>
+      <a href="#">문의</a>
+      <a href="#">소개</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+      <h1>환영합니다</h1>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+      <h2>소개</h2>
+      <p>이 웹사이트는 예제 텍스트로 채워져 있습니다. 여기에는 사용자가 볼 수 있는 다양한 콘텐츠가 포함될 수 있습니다.</p>
+
+      <h2>갤러리</h2>
+      <div class="gallery">
+        <img src="images/pic1.jpg" alt="이미지 1" />
+        <img src="images/pic2.jpg" alt="이미지 2" />
+        <img src="images/pic3.jpg" alt="이미지 3" />
+        <!-- 추가 이미지가 있을 수 있음 -->
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>© 2024 웹사이트 예제. 모든 권리 보유.</p>
+    </footer>
+
+    <script>
+      // Gallery Image Click Event
+      const galleryImages = document.querySelectorAll(".gallery img");
+      galleryImages.forEach((img) => {
+        img.addEventListener("click", () => {
+          const modal = document.createElement("div");
+          modal.style.position = "fixed";
+          modal.style.top = "0";
+          modal.style.left = "0";
+          modal.style.width = "100%";
+          modal.style.height = "100%";
+          modal.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+          modal.style.display = "flex";
+          modal.style.alignItems = "center";
+          modal.style.justifyContent = "center";
+
+          const largeImg = document.createElement("img");
+          largeImg.src = img.src;
+          largeImg.style.maxWidth = "90%";
+          largeImg.style.maxHeight = "90%";
+          largeImg.alt = img.alt;
+
+          modal.appendChild(largeImg);
+          document.body.appendChild(modal);
+
+          modal.addEventListener("click", () => {
+            modal.remove();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
