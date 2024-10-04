@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main 페이지</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #96c99f;
+          height: 100vh;
+          box-sizing: border-box;
+        }
+    
+        .wrap {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #fff;
+          width: 80%;
+          padding: 10px;
+          margin: 0 auto;
+        }
+    
+        /* 섹션 스타일 */
+        .section {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+    
+        #signup-section {
+          width: 30%;
+          margin-left: 20px;
+        }
+    
+        #dashboard-section {
+          width: 70%;
+          display: inline-block;
+        }
+    
+        /* 버튼 스타일 */
+        button {
+          width: 80%;
+          background-color: #007bff;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+    
+        /* 로그아웃 버튼 스타일 */
+        #logout-button {
+          background-color: #dc3545;
+          width: 30%;
+          float: right;
+        }
+    
+        /* 사용자 이름 디스플레이 스타일 */
+        #username-display {
+          font-size: 20px;
+          color: #3d3d3d;
+          /* width: 60%; */
+          margin-top: 8px;
+          display: inline-block;
+          margin-left: 100px;
+        }
+        #login-section {
+          width: 30%;
+        }
+      </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div id="signup-section">
+        <button id="signup-button">회원가입</button>
+      </div>
+      <div id="login-section">
+        <button id="login-button">로그인</button>
+      </div>
+      <div id="dashboard-section" style="display: none">
+        <div id="username-display">
+          <!-- 로그인된 아이디 출력 -->
+        </div>
+        <button id="logout-button">로그아웃</button>
+      </div>
+    </div>
+    <div class="userlogin" id="userlogin">
+      <!-- 로그인된 사용자 정보가 있으면 출력 -->
+    </div>
+    <script>
+      // 로그인/회원가입 버튼 클릭시 호출되는 함수
+      // 로그인 버튼 클릭시 페이지 이동
+      document.getElementById("login-button").addEventListener("click", function(){
+          window.location.href = "login.html"
+      })
+      // 회원가입 버튼 클릭시 페이지 이동
+      document.getElementById("signup-button").addEventListener("click",function(){
+        window.location.href = "signup.html"
+      })
+    </script>
+  </body>
+</html>

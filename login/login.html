@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인페이지</title>
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login Page</h1>
+      <form id="login-form">
+        <label for="username">사용자 이름:</label>
+        <input type="text" id="username" name="username" required />
+        <br />
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required />
+        <br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <script>
+      const LoginForm = document.getElementById("login-form");
+      LoginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        console.log(users);
+
+        const userFind = users.find((user) => user.username === username && user.password === password)
+        if(userFind){
+            // 로그인이 성공하면 로컬스토리지에 사용자 정보를 저장합니다.
+            localStorage.setItem("userFind", JSON.stringify(userFind))
+            alert(`${username}님 환영합니다. 로그인 성공하였습니다.`)
+            window.location.href = "index.html"
+        }else{
+            alert("로그인 정보가 일치하지 않습니다.")
+            LoginForm.reset()
+        }
+    });
+    </script>
+  </body>
+</html>
