@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>페이지네이션 예제</title>
+    <style>
+      .pagination {
+        display: flex;
+        list-style-type: none;
+        gap: 10px;
+      }
+      .pagination li {
+        cursor: pointer;
+        padding: 5px 10px;
+        border: 1px solid #000;
+      }
+      .pagination li.active {
+        background-color: #333;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>페이지네이션 예제</h1>
+    <!-- 데이터를 표시할 영역 -->
+    <ul id="dataList">
+      <!-- js 출력 -->
+    </ul>
+    <!-- 페이지네이션 버튼 -->
+    <ul class="pagination" id="pagination">
+      <!-- js출력 -->
+    </ul>
+    <script>
+      // 예시 데이터(간단한 숫자목록)
+      const items = Array.from({ length: 100 }, (v, k) => k + 1); // 1부터 100까지의 숫자
+      // console.log(items);
+      // console.log(v); // v is not defined
+      // 페이지당 표시할 항목수
+      const itemsPerpage = 10;
+      // 현재 페이지 번호
+      let currentPage = 1;
+      // 총 페이지 수를 전역으로 선언
+      let totalPages;
+      // 페이지네이션 함수
+      function displayPagination(totalItems, itemsPerpage) {
+        // console.log(totalItems); // 100
+
+        // console.log(itemsPerpage); // 10
+        totalPages = Math.ceil(totalItems / itemsPerpage); //총페이지 수 계산
+        // console.log(totalPages);
+        const paginationUL = document.getElementById("pagination");
+        // console.log(paginationUL);
+        paginationUL.innerHTML = ""; //기존 페이지네이션 초기화
+        // 이전 페이지 버튼 추가
+        const prevBtn = document.createElement("li");
+        prevBtn.textContent = "이전";
+        prevBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            // 페이지별 목록 함수 호출
+            displayItems(items, currentPage, itemsPerpage);
+            // 버튼활성화 함수 호출
+            updatePaginationUI();
+          }
+        });
+        paginationUL.appendChild(prevBtn);
+        // 페이지 버튼 생성
+        for (let i = 1; i <= totalPages; i++) {
+          // console.log(i);
+          const li = document.createElement("li");
+          li.textContent = i;
+          li.addEventListener("click", function () {
+            currentPage = i;
+            // console.log(currentPage);
+            // 페이지별 목록 함수 호출
+            displayItems(items, currentPage, itemsPerpage);
+            // 버튼활성화 함수 호출
+            updatePaginationUI();
+          });
+          paginationUL.appendChild(li);
+        }
+        // 다음페이지 버튼 추가
+        const nextBtn = document.createElement("li");
+        nextBtn.textContent = "다음";
+        nextBtn.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            // 페이지별 목록 함수 호출
+            displayItems(items, currentPage, itemsPerpage);
+            // 버튼활성화 함수 호출
+            updatePaginationUI();
+          }
+        });
+        paginationUL.appendChild(nextBtn);
+        // ==================================
+      }
+      // 페이지별 항목 표시 함수
+      //  displayItems(items, currentPage, itemsPerpage);
+      function displayItems(item, page, itemsper) {
+        // console.log(item,page,itemsper);
+        const dataList = document.getElementById("dataList");
+        dataList.innerHTML = ""; //기존 목록 초기화
+        // 현재 페이지에 해당하는 데이터 범위 계산
+        const start = (page - 1) * itemsper;
+        // console.log(start);
+        const end = start + itemsper;
+        // console.log(end);
+        const pageItems = item.slice(start, end); // 해당 범위의 데이터 가져오기
+        // console.log(pageItems);
+        // 항목을 ul 목록으로 출력
+        pageItems.forEach((item) => {
+          // console.log(item);
+          const li = document.createElement("li");
+          li.textContent = `아이템${item}`;
+          dataList.appendChild(li);
+        });
+      }
+      // 페이지네이션 UI 업데이트 함수
+      function updatePaginationUI() {
+        const paginationItems = document.querySelectorAll("#pagination li");
+        // console.log(paginationItems);
+        paginationItems.forEach((item, index) => {
+          // console.log(item, index);
+          if (index === currentPage) {
+            console.log(currentPage);
+
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+      }
+      // 페이지별 목록 함수 호출
+      displayItems(items, currentPage, itemsPerpage);
+      // 버튼활성화 함수 호출
+      updatePaginationUI();
+      // 페이지네이션 함수 호출
+      displayPagination(items.length, itemsPerpage);
+    </script>
+  </body>
+</html>

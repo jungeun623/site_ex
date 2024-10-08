@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>로그인페이지</title>
+    <title>로그인 페이지</title>
     <style>
       body {
         background-color: #f4f4f4;
@@ -63,25 +63,28 @@
       </form>
     </div>
     <script>
-      const LoginForm = document.getElementById("login-form");
-      LoginForm.addEventListener("submit", function (e) {
+      const loginForm = document.getElementById("login-form");
+      loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const users = JSON.parse(localStorage.getItem("users")) || [];
         console.log(users);
 
-        const userFind = users.find((user) => user.username === username && user.password === password)
-        if(userFind){
-            // 로그인이 성공하면 로컬스토리지에 사용자 정보를 저장합니다.
-            localStorage.setItem("userFind", JSON.stringify(userFind))
-            alert(`${username}님 환영합니다. 로그인 성공하였습니다.`)
-            window.location.href = "index.html"
-        }else{
-            alert("로그인 정보가 일치하지 않습니다.")
-            LoginForm.reset()
+        const userFind = users.find((user) => user.username === username && user.password === password);
+        if (userFind) {
+          // 로그인이 성공하면 로컬스토리지에 사용자 정보를 저장합니다.
+          localStorage.setItem("userFind", JSON.stringify(userFind));
+          alert(`${username}님 환영합니다. 로그인 성공하였습니다.`);
+          window.location.href = `index.html?username=${encodeURIComponent(username)}`;
+        } else {
+          alert("로그인 정보가 일치하지 않습니다. 다시 확인바랍니다.");
+          loginForm.reset();
         }
-    });
+     
+       
+      });
+
     </script>
   </body>
 </html>

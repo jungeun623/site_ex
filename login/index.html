@@ -5,72 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main 페이지</title>
     <style>
-        /* 기본 스타일 */
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #96c99f;
-          height: 100vh;
-          box-sizing: border-box;
-        }
-    
-        .wrap {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: #fff;
-          width: 80%;
-          padding: 10px;
-          margin: 0 auto;
-        }
-    
-        /* 섹션 스타일 */
-        .section {
-          text-align: center;
-          margin-bottom: 20px;
-        }
-    
-        #signup-section {
-          width: 30%;
-          margin-left: 20px;
-        }
-    
-        #dashboard-section {
-          width: 70%;
-          display: inline-block;
-        }
-    
-        /* 버튼 스타일 */
-        button {
-          width: 80%;
-          background-color: #007bff;
-          color: #fff;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          font-size: 16px;
-          cursor: pointer;
-        }
-    
-        /* 로그아웃 버튼 스타일 */
-        #logout-button {
-          background-color: #dc3545;
-          width: 30%;
-          float: right;
-        }
-    
-        /* 사용자 이름 디스플레이 스타일 */
-        #username-display {
-          font-size: 20px;
-          color: #3d3d3d;
-          /* width: 60%; */
-          margin-top: 8px;
-          display: inline-block;
-          margin-left: 100px;
-        }
-        #login-section {
-          width: 30%;
-        }
-      </style>
+      /* 기본 스타일 */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #96c99f;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+
+      .wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        width: 80%;
+        padding: 10px;
+        margin: 0 auto;
+      }
+
+      /* 섹션 스타일 */
+      .section {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      #signup-section {
+        width: 30%;
+        margin-left: 20px;
+      }
+
+      #dashboard-section {
+        width: 70%;
+        display: inline-block;
+      }
+
+      /* 버튼 스타일 */
+      button {
+        width: 80%;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      /* 로그아웃 버튼 스타일 */
+      #logout-button {
+        background-color: #dc3545;
+        width: 30%;
+        float: right;
+      }
+
+      /* 사용자 이름 디스플레이 스타일 */
+      #username-display {
+        font-size: 20px;
+        color: #3d3d3d;
+        margin-top: 8px;
+        display: inline-block;
+        margin-left: 100px;
+      }
+
+      #login-section {
+        width: 30%;
+      }
+    </style>
   </head>
   <body>
     <div class="wrap">
@@ -91,15 +91,60 @@
       <!-- 로그인된 사용자 정보가 있으면 출력 -->
     </div>
     <script>
-      // 로그인/회원가입 버튼 클릭시 호출되는 함수
+      // 페이지가 로드될 때 대시보드 화면을 표시
+      window.onload = function () {
+        showInitDashboard();
+      };
+      
       // 로그인 버튼 클릭시 페이지 이동
-      document.getElementById("login-button").addEventListener("click", function(){
-          window.location.href = "login.html"
-      })
+      document.getElementById("login-button").addEventListener("click", function () {
+        window.location.href = "login.html";
+      });
+
       // 회원가입 버튼 클릭시 페이지 이동
-      document.getElementById("signup-button").addEventListener("click",function(){
-        window.location.href = "signup.html"
-      })
+      document.getElementById("signup-button").addEventListener("click", function () {
+        window.location.href = "signup.html";
+      });
+
+      // 메인 페이지 화면 표시 함수
+      function showInitDashboard() {
+        // 현재 페이지의 URL에서 쿼리 문자열을 가져와서 URLSearchParams 객체 생성
+        let params = new URLSearchParams(window.location.search);
+
+        // 'username'이라는 쿼리 매개변수 값을 추출
+        let username = params.get("username");
+
+        if (username) {
+          document.getElementById("login-section").style.display = "none";
+          document.getElementById("dashboard-section").style.display = "block";
+          document.getElementById("username-display").textContent = `${username}님! 환영합니다.`;
+          document.getElementById("userlogin").textContent = `로그인된 사용자: ${username}`;
+        } else {
+          document.getElementById("login-section").style.display = "block";
+          document.getElementById("dashboard-section").style.display = "none";
+          document.getElementById("logout-button").style.display = "none"; // 로그아웃 버튼 숨김
+          document.getElementById("userlogin").textContent = ""; // 로그인 정보 초기화
+        }
+      }
+
+      // 로그아웃 기능
+      document.getElementById("logout-button").addEventListener("click", function () {
+        document.getElementById("login-section").style.display = "block";
+        document.getElementById("dashboard-section").style.display = "none";
+        document.getElementById("userlogin").textContent = "";
+        clearUserData(); // Clear login data
+        clearUsernameParam(); // Clear or reset the username parameter
+      });
+      function clearUserData() {
+        localStorage.removeItem("username");
+      }
+
+      function clearUsernameParam() {
+        var url = new URL(window.location.href);
+        url.searchParams.delete("username");
+        window.history.replaceState({}, "", url.toString());
+      }
+    
     </script>
   </body>
 </html>
