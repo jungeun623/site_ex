@@ -11,21 +11,22 @@
       <!-- 사용자 정보가 표시됨 -->
     </div>
     <script>
-      //페이지가 로드될 때 저장된 정부 불러오기
+      // 페이지가 로드될 때 저장된 정보 불러오기
       window.addEventListener("load", function () {
         const userId = localStorage.getItem("사용자 아이디");
-        const theme = localStorage.getItem("사용자 테마");
-        const language = localStorage.getItem("사용자 언어");
+        const theme = localStorage.getItem("사용자 언어");
+        const language = localStorage.getItem("사용자 테마");
         if (userId && theme && language) {
           const userInfoDiv = document.getElementById("userInfo");
           userInfoDiv.innerHTML = `
-          <p><strong>아이디:</strong> ${userId} </p>
-          <p><strong>테마:</strong> ${theme} </p>
-          <p><strong>언어:</strong> ${language} </p>
-          `
-        }else{
-            // alert("저장된 사용자 정보가 없습니다.")
-            document.getElementById("userInfo").innerText = "저장된 사용자 정보가 없습니다."
+            <p><strong>아이디:</strong> ${userId}</p>
+                    <p><strong>선택한 테마:</strong> ${theme}</p>
+                    <p><strong>선택한 언어:</strong> ${language}</p>
+            
+            `;
+        } else {
+          //   alert("저장된 사용자 정보가 없습니다.");
+          document.getElementById("userInfo").innerText = "저장된 사용자 정보가 없습니다.";
         }
       });
     </script>

@@ -7,41 +7,40 @@
   </head>
   <body>
     <script>
-      // 1. 값 저장하기
+      //  1.값 저장하기
       localStorage.setItem("userId", "user1234");
       localStorage.setItem("theme", "dark");
-      // 2. 값 가져오기
-      // 로컬스토리지에서 아이디랑 테마를 저장
+      //   2.값 가져오기
+      // 로컬스토리지에서 아이디랑 데마를 저장
       const userId = localStorage.getItem("userId");
       console.log(`User Id : ${userId}`);
       const theme = localStorage.getItem("theme");
       console.log(`Theme : ${theme}`);
-      // 3. 값을 삭제하기
-      //   localStorage.removeItem("userId");
-      //   localStorage.removeItem("theme");
+      // 3.값을 삭제하기
+      // localStorage.removeItem("userId")
+      // localStorage.removeItem("theme")
       // 모든 로컬스토리지에 있는 데이터를 삭제
       // localStorage.clear()
-      // 4. json  데이터 저장하기
+      // 4.json 테이터 저장하기
       const userInfo = {
         id: "user12345",
         name: "홍길동",
-        perferance: {
+        preferance: {
           theme: "dark",
           laguage: "ko",
         },
       };
-      // 01) 객체를 JSON 문자열로 변환하여 로컬스토리지에 저장
+      //  01) 객체를 JSON 문자열로 변환하여 로컬스토리지에 저장
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
       // 02) 객체를 불러오기
+      // 로컬스토리지에서 JSON 문자열을 가져와서 다시 객체로 변환
       const storeUserInfo = JSON.parse(localStorage.getItem("userInfo"));
       // 홍길동 이름 출력
       console.log(storeUserInfo.name);
-      // user12345 출력
-      console.log(storeUserInfo.id);
-      //   dark 출력
-      console.log(storeUserInfo.perferance.theme);
-      // laguage 출력
-      console.log(storeUserInfo.perferance.laguage);
+    //   user12345출력
+    
+    //  dark 출력 
+
     </script>
   </body>
 </html>

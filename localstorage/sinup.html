@@ -10,7 +10,7 @@
     <form id="loginForm">
       <label for="userId">아이디:</label>
       <input type="text" id="userId" required /><br /><br />
-      <label for="userPassword">비밀번호:</label>
+      <label for="userPassword">아이디:</label>
       <input type="password" id="userPassword" required /><br /><br />
       <button type="submit">저장</button>
     </form>
@@ -29,20 +29,20 @@
         const userPassword = document.getElementById("userPassword").value;
         // 로컬 스토리지에 저장
         localStorage.setItem("userId", userId);
-        localStorage.setItem("userPassword", userPassword);
+        localStorage.setItem("password", userPassword);
         alert("아이디와 비밀번호가 저장 되었습니다.");
         loginForm.reset();
       });
-      // 불러오기 함수
+      //  불러오기 함수
       loadBtn.addEventListener("click", () => {
         const storedUserId = localStorage.getItem("userId");
-        const storedPassword = localStorage.getItem("userPassword");
+        const storedPassword = localStorage.getItem("password");
         if (storedUserId && storedPassword) {
-          output.innerHTML = `
-          <p><strong>아이디:</strong> ${storedUserId} </p>
-          <p><strong>비밀번호:</strong> ${storedPassword} </p>`;
-        }else{
-            output.innerHTML = `저장된 정보가 없습니다.`
+          output.innerHTML = ` 
+            <p><strong>아이디:</strong> ${storedUserId}</p>
+            <p><strong>비밀번호:</strong> ${storedPassword}</p>`;
+        } else {
+          output.innerHTML = `저장된 정보가 없습니다.`;
         }
       });
     </script>
