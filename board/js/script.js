@@ -41,7 +41,18 @@ window.onload = function () {
     </div>
     `;
     // 닫기 버튼에 클릭 이벤트 기능
-    
+    const deletButton = postElement.querySelector(".delete-post-btn");
+    deletButton.addEventListener("click", function () {
+      // 게시글을 삭제하고 화면에서 제거
+      const postLi = posts.indexOf(post);
+      // console.log(postLi);
+      if (postLi !== -1) {
+        // 인덱스 번호가 존재한다면
+        posts.splice(postLi, 1);
+        localStorage.setItem("posts", JSON.stringify(posts));
+        postElement.remove();
+      }
+    });
     // prepend() 부모요소의 맨앞에 새작식요소를 추가
     postList.prepend(postElement);
   }
@@ -65,7 +76,7 @@ window.onload = function () {
         };
         // 배열에 게시글 추가
         posts.push(newPost);
-        // console.log(posts);
+        console.log(posts);
         localStorage.setItem("posts", JSON.stringify(posts));
         // 화면에 게시글 추가
         addPostToDOM(newPost);
@@ -76,6 +87,37 @@ window.onload = function () {
         // 이미지가 없을 경우도 처리
         reader.onload();
       }
+    }
+  });
+  //   검색기능 추가
+  searchBtn.addEventListener("click", function () {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filterPosts = posts.filter(function (post) {
+      // console.log(post);
+      return post.title.toLowerCase().includes(searchTerm) || post.content.toLowerCase().includes(searchTerm);
+    });
+    postList.innerHTML =""
+    for(const post of filterPosts){
+          // 화면에 게시글 추가
+          addPostToDOM(post);
+    }
+  });
+//   검색 지우기 버튼을 클릭 이벤트 처리
+clearBtn.addEventListener("click",function(){
+    // 기존 게시글 목록을 지우고 모든 게시글 표시
+    postList.innerHTML =""
+    searchInput.value=""
+    for(const post of posts){
+        addPostToDOM(post) 
+    }
+
+})
+  //  전체 삭제
+  deleteAllBtn.addEventListener("click", function () {
+    if (confirm("정말 모든 게시글을 삭제하시겠습니까?")) {
+      posts = [];
+      localStorage.removeItem("posts");
+      postList.innerHTML = "";
     }
   });
 };
