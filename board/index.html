@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>게시판</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>게시판</h1>
+      <form class="post-form">
+        <label for="postTitle">제목:</label>
+        <input type="text" id="postTitle" required />
+        <label for="postContent">내용:</label>
+        <textarea id="postContent" cols="30" rows="10" required></textarea>
+        <label for="postImage">이미지 업로드:</label>
+        <input type="file" id="postImage" accept="image/*" />
+        <label for="postDate">Date:</label>
+        <input type="date" name="postDate" id="postDate" />
+        <br />
+        <button id="addPostBtn">게시글 작성</button>
+      </form>
+      <div id="searchContainer">
+        <input type="text" id="searchInput" placeholder="Search....." />
+        <button id="clearBtn">X</button>
+        <button id="searchBtn">Search</button>
+      </div>
+      <ul id="postList">
+        <!-- 게시글이 여기에 표시됩니다. -->
+       
+      </ul>
+      <button id="deleteAllBtn">전체 삭제</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* styles.css */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-form {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#postImage {
+  margin-right: 170px;
+}
+button {
+  background-color: #0e3c6d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  /* margin: 0 auto; */
+  margin-left: auto;
+  display: block;
+  margin-top: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#postList {
+  list-style: none;
+  padding: 0;
+  height: 800px;
+  overflow-y: auto;
+}
+#postDate {
+  width: 120px;
+  padding: 2px;
+}
+
+.post {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post h2 {
+  font-size: 20px;
+  margin: 0 0 10px;
+  text-decoration: underline;
+  background-color: #ccc;
+}
+
+.post p {
+  font-size: 16px;
+  margin: 0;
+}
+.post-content {
+  display: flex;
+  flex-direction: column; /* 내용과 이미지를 세로로 정렬합니다. */
+  align-items: flex-start; /* 내용과 이미지를 좌측 정렬합니다. */
+}
+
+.post-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 내용과 이미지를 가로로 정렬합니다. */
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  align-items: stretch;
+}
+
+.post-details img {
+  max-width: 100px; /* 이미지 크기 제한 */
+  min-width: 100px;
+  margin-left: 20px; /* 내용과 이미지 사이 간격 설정 */
+}
+#searchInput {
+  width: 80%;
+  /* display: inline-block; */
+}
+#clearBtn {
+  display: inline-block;
+  background-color: rgb(69, 65, 65);
+}
+#searchContainer {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
