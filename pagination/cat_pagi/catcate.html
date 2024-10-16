@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고양이 정보</title>
+    <style>
+        .wrap{
+         width: 50%;
+         margin: 0 auto;
+         text-align: center;
+     }
+
+     .cat-card {
+         width: 300px;
+         border: 1px solid #ccc;
+         padding: 10px;
+         margin-bottom: 10px;
+         text-align: center;
+         margin: 0 auto;
+     }
+
+     .cat-image {
+         width: 200px;
+         height: 200px;
+         object-fit: cover;
+         margin: 0 auto;
+         display: block;
+     }
+ </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>고양이 정보</h1>
+      <div id="catList">
+        <!-- js출력 -->
+      </div>
+    </div>
+    <script>
+      //url에서 쿼리문자열을 읽어와서 고양이의 아이디를 가져온다.
+      const urlParams = new URLSearchParams(window.location.search);
+      const catId = urlParams.get("id");
+      //   console.log(catId);
+      function displayCatInfo() {
+        fetch("cat.json")
+          .then((response) => response.json())
+          .then(function (data) {
+            // console.log(data);
+            const catListDiv = document.getElementById("catList");
+            const cat = data.find((cat) => cat.id === parseInt(catId));
+            // console.log(cat);
+            if (cat) {
+              const catCard = document.createElement("div");
+              catCard.className = "cat-card";
+              catCard.innerHTML = `
+               <img class="cat-image" src="${cat.url}" alt="${cat.title} 사진">
+                            <h2>${cat.title}</h2>
+                            <p>고양이 특징: ${cat.description}</p>
+              `;
+              catListDiv.appendChild(catCard);
+            } else {
+              console.error("고양이 정보가 없습니다.");
+            }
+          })
+          .catch((error) => {
+            console.error("데이터를 가져오는 중 에러가 발생했습니다:", error);
+          });
+      }
+      displayCatInfo();
+    </script>
+  </body>
+</html>

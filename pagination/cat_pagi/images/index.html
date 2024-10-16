@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고양이 정보 리스트</title>
+  </head>
+  <body>
+    <div id="catlist">
+      <!-- js출력 고양이 리스트 -->
+    </div>
+    <div class="pagination" id="pagination">
+      <!-- js출력 페이지네이션 -->
+    </div>
+    <script>
+      //고양이 리스트를 3개 보여준다.
+      const itemsPerPage = 3;
+      let currentPage = 1;
+      const catListDiv = document.getElementById("catlist");
+      const paginationDiv = document.getElementById("pagination");
+      const prevBtn = document.createElement("a"); //이전버튼
+      const nextBtn = document.createElement("a"); //다음버튼
+      //url에서 쿼리문자열을 읽어와서 고양이의 아이디를 가져온다.
+      const urlParams = new URLSearchParams(window.location.search);
+      const catId = urlParams.get("id");
+      // 고양이 정보를 가져와서 화면에 출력하는 함수
+      function displayCatInfo(page) {
+        // console.log(page);
+        fetch("cat.json")
+        .then((response) => response.json())
+        .then(function(data){
+          console.log(data);
+          
+        })
+        .catch((error) => {
+            console.error("데이터를 가져오는 중 에러가 발생했습니다:", error);
+          });
+      }
+      displayCatInfo(currentPage);
+    </script>
+  </body>
+</html>
